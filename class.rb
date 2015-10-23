@@ -37,6 +37,32 @@ self.year = options[:year]
 self.system = options[:system]
 @created_at = Time.now
 end
+
+def to_s
+  "name : " + self.name
+end
+
+def description
+    "#{self} was released in #{self.year}."
+  end
+
+end
+
+
+class ArcadeGame < Game
+  attr_accessor :weight
+
+  def initialize(name, options={})
+    super
+    self.weight = options[:weight]
+  end
+end
+
+class ConsoleGame < Game
+  def to_s
+    "#{self.name} - #{self.system}"
+  end
+
 end
 
 mario = Game.new(
@@ -45,11 +71,15 @@ system: "ps4",
 year: 1990
 )
 
-puts mario.name
+puts mario.to_s
 
 puts mario.system
 puts mario.created_at
 
-library = Library.new
+#library = Library.new
 
-library.add_game(mario)
+#library.add_game(mario)
+
+ddr = ConsoleGame.new('ddr', system: "console", year:"1998")
+
+puts ddr.description
